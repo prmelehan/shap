@@ -323,7 +323,7 @@ class Explanation(metaclass=MetaExplanation):
             pos += 1
 
             # skip over Ellipsis
-            if type(t) not in [np.ndarray, pd.Series]
+            if type(t) not in [np.ndarray, pd.Series]:
                 if t == Ellipsis:
                     pos += len(self.shape) - len(item)
                     continue

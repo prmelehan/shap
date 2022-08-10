@@ -1,6 +1,5 @@
 import numpy as np
 from .._serializable import Serializable, Serializer, Deserializer
-from torch import Tensor
 
 
 class Model(Serializable):
@@ -20,7 +19,7 @@ class Model(Serializable):
 
     def __call__(self, *args):
         out = self.inner_model(*args)
-        out = out.cpu().detach().numpy() if isinstance(out, Tensor) else np.array(out)
+        out = out.cpu().detach().numpy() if out.__class__.__name__ == 'Tensor' else np.array(out)
         return out
 
     def save(self, out_file):

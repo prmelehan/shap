@@ -5,7 +5,6 @@ from ._masker import Masker
 from .._serializable import Serializer, Deserializer
 import heapq
 from numba import jit
-from torch import Tensor
 
 # TODO: heapq in numba does not yet support Typed Lists so we can move to them yet...
 from numba.core.errors import NumbaPendingDeprecationWarning
@@ -70,7 +69,7 @@ class Image(Masker):
 
     def __call__(self, mask, x):
 
-        if isinstance(x, Tensor):
+        if x.__class__.__name__ == 'Tensor':
             x = x.cpu().numpy()
 
         if np.prod(x.shape) != np.prod(self.input_shape):
